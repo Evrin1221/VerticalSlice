@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    [SerializeField] private float _minSpeed;
     // Start is called before the first frame update
+
     void Start()
     {
         
@@ -13,6 +16,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
     }
 }
