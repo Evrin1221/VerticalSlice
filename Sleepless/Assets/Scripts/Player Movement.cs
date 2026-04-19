@@ -8,11 +8,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _minSpeed;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+    private float _backSpeed;
     // Start is called before the first frame update
 
     void Start()
     {
-        
+        _backSpeed = _minSpeed + _speed;
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = transform.position + new Vector3(-1, 0, 0) * _speed * Time.deltaTime;
+            transform.position = transform.position + new Vector3(-1, 0, 0) * _backSpeed * Time.deltaTime;
         }
 
 
