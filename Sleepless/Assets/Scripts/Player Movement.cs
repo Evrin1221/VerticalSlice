@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //basic movement
-   // [SerializeField] private float _minSpeed;
+    // [SerializeField] private float _minSpeed;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _backSpeed;
@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     //variable jump height
 
-    [SerializeField]private float _jumpCutMultiplier;
-    [SerializeField]private float _maxJumpHoldTime;
+    [SerializeField] private float _jumpCutMultiplier;
+    [SerializeField] private float _maxJumpHoldTime;
     private bool _isJumping;
     private bool _jumpHeld;
     private float _jumpTimer = 0f;
@@ -31,12 +31,12 @@ public class PlayerMovement : MonoBehaviour
     private float _coyoteTimeMax = 1.2f;
     private bool _canStillJump;
 
-    
+
     //jump buffer
 
     private float _jumpBufferTimer = 0f;
     private float _jumpBufferMax = 0.1f;
-
+    private bool _storingJump;
 
 
 
@@ -48,12 +48,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
+        // transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
 
         Movement();
         CoyoteTime();
+        JumpBuffer();
         Jump();
-        
+
     }
 
 
@@ -74,14 +75,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && (_isGrounded || _canStillJump))
+        if ( (_isGrounded || _canStillJump) && _storingJump)
         {
             _coyoteTimer = 0f;
             _canStillJump = false;
+
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
             _isGrounded = false;
             _jumpTimer = 0f;
             _isJumping = true;
+            _storingJump = false;
+            _jumpBufferTimer = 0f;
+
         }
 
         if (Input.GetKey(KeyCode.Space) && _isJumping)
@@ -100,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private  void JumpTimer()
+    private void JumpTimer()
     {
         _jumpTimer += Time.deltaTime;
     }
@@ -122,9 +127,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (!_isGrounded)
         {
-            
+
             _coyoteTimer -= Time.deltaTime;
-            if(_coyoteTimer <= 0)
+            if (_coyoteTimer <= 0)
             {
                 _canStillJump = false;
             }
@@ -133,6 +138,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void JumpBuffer()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _jumpBufferTimer = _jumpBufferMax;
+            _storingJump = true;
+
+        }
+        if (_storingJump)
+        {
+            JumpBufferTimer();
+            if (_jumpBufferTimer <= 0)
+            {
+                _storingJump = false;
+                _jumpBufferTimer = 0f;
+            }
+        }
+
 
     }
+
+    private void JumpBufferTimer()
+    {
+        _jumpBufferTimer -= Time.deltaTime;
+    }
 }
+
+
