@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //basic movement
-    [SerializeField] private float _minSpeed;
+   // [SerializeField] private float _minSpeed;
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _backSpeed;
@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private bool _jumpHeld;
     private float _jumpTimer = 0f;
 
+
+    //coyote time
+
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
@@ -32,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
+       // transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
 
         Movement();
         Jump();
