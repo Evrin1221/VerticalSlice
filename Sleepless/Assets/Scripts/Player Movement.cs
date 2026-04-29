@@ -39,6 +39,12 @@ public class PlayerMovement : MonoBehaviour
     private bool _storingJump;
 
 
+    //fall multiplier
+
+    private bool __isFalling;
+    [SerializeField] private float _fallMultiplier;
+
+
 
     void Start()
     {
@@ -49,11 +55,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
-
+        DetectIfFalling();
         Movement();
         CoyoteTime();
         JumpBuffer();
         Jump();
+        ApplyFallMultiplier();
 
     }
 
@@ -160,6 +167,26 @@ public class PlayerMovement : MonoBehaviour
     private void JumpBufferTimer()
     {
         _jumpBufferTimer -= Time.deltaTime;
+    }
+
+    private void DetectIfFalling()
+    {
+        if(_rb.velocity.y < 0f)
+        {
+            __isFalling = true;
+        }
+        else
+        {
+            __isFalling = false;
+        }
+    }
+
+    private void ApplyFallMultiplier()
+    {
+        if (__isFalling)
+        {
+            _rb.gravityScale = _fallMultiplier;
+        }
     }
 }
 
