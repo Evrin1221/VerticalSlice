@@ -44,11 +44,13 @@ public class PlayerMovement : MonoBehaviour
     private bool __isFalling;
     [SerializeField] private float _fallMultiplier;
 
-
+    //Animations
+    private Animator _animator;
 
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -61,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
         JumpBuffer();
         Jump();
         ApplyFallMultiplier();
+        AnimatorGroundedCheck();
+      
 
     }
 
@@ -187,6 +191,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.gravityScale = _fallMultiplier;
         }
+    }
+
+    private void AnimatorGroundedCheck()
+    {
+        _animator.SetBool("isGrounded", _isGrounded);
     }
 }
 
