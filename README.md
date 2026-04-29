@@ -9,7 +9,11 @@ I use a visual scripting graph to handle the collision detection of the grenade 
 
 I use a state graph to control the animations in my game. My game is a sidescroller, but you can still press the forward key to go faster than the base speed. I made a state machine that connects to the animator. I had the game start in the walk state, which is when the player is moving at the base speed, and the player isn't using D or the right arrow. I made a transition that gets triggered when the player holds either the D key or the right arrow, to change into the run state, and the run animation will play. For the transition back to the walk state, I had it get triggered when the player lifts either key.
 
+I also plan on using state machines to respond to the different UI health levels when I add it in the future. 
+
 ![alt text](<Screenshot 2026-04-28 231416.png>)
+
+In my new breakdown I added another circle to represent my tilemap system. I have everything that is stationary on separate tilemaps on a singular grid (ground, platforms, collectables etc). This is so that I don't have to add my autoscroller script to every stationary category I have, but instead I can just apply it to the entire grid. I thought since this is almost a framework for how I will have to separate my code depending on which sorting categories everything is on, it would be useful to have it included in my breakdown. 
 
 ## Milestone 2 Devlog
 Milestone 2 Devlog goes here.
