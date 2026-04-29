@@ -47,6 +47,12 @@ public class PlayerMovement : MonoBehaviour
     //Animations
     private Animator _animator;
 
+    //temp grenade
+    [SerializeField] private GameObject circlePrefab;
+    [SerializeField] private float duration = 0.2f;
+    [SerializeField] private KeyCode key = KeyCode.A;
+
+
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
@@ -64,9 +70,14 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         ApplyFallMultiplier();
         AnimatorGroundedCheck();
-      
+
+
+       SpawnCircle();
+
 
     }
+
+
 
 
     private void Movement()
@@ -197,6 +208,21 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetBool("isGrounded", _isGrounded);
     }
+
+    private void SpawnCircle()
+    {
+        if (Input.GetKeyDown(key))
+        {
+            GameObject circle = Instantiate(circlePrefab, transform.position, Quaternion.identity);
+            SpriteRenderer sr = circle.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                sr.enabled = true;
+            }
+            Destroy(circle, duration);
+        }
+    }
+
 }
 
 
