@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
     protected bool _hasTimeLeft;
 
     protected EnemyState _currentState;
+
+    //spawning
+    [SerializeField] public float _spawnRate;
+     public float _spawnCountdown;
+
     public enum EnemyState
     {
         _roaming, _chasing, _attacking, _retreating
@@ -37,12 +42,15 @@ public class Enemy : MonoBehaviour
         _playerTransform = Locator.Instance._player.transform;
         _currentState = EnemyState._roaming; //might even do this in the spawner script
         _attackTimer = _attackDuration;
+        _hasTimeLeft = true;
+        _spawnCountdown = _spawnRate;
     }
 
     // Update is called once per frame
     void Update()
     {
         DetectPlayerInRange();
+        RunCurrentState(_currentState);
 
     }
 
@@ -53,7 +61,11 @@ public class Enemy : MonoBehaviour
 
     protected void DetectPlayerInRange()
     {
-        if(Vector2.Distance(_playerTransform.position, transform.position) <= _attackDistance)
+        float _distanceToPlayer = Vector2.Distance(_playerTransform.position, transform.position); 
+
+        if (_currentState == EnemyState._retreating) return;
+
+        else if (_distanceToPlayer<= _attackDistance)
         {
             //chasing and attacking
             _playerInRange = true;
@@ -62,7 +74,7 @@ public class Enemy : MonoBehaviour
             ChangeState(EnemyState._attacking);
         }
 
-        else if( (_attackDistance <= Vector2.Distance(_playerTransform.position, transform.position)) &&(Vector2.Distance(_playerTransform.position, transform.position)<=_detectionDistance))
+        else if( (_attackDistance <= _distanceToPlayer) &&(_distanceToPlayer<=_detectionDistance))
             //chasing but not attacking
         {
             _playerInRange = true;
@@ -71,7 +83,7 @@ public class Enemy : MonoBehaviour
             ChangeState(EnemyState._chasing);
         }
 
-        else if (Vector2.Distance(_playerTransform.position, transform.position) > _detectionDistance && _hasTimeLeft)
+        else if (_distanceToPlayer > _detectionDistance && _hasTimeLeft)
         {
             _playerInRange = false;
             _canAttack = false;
@@ -90,7 +102,7 @@ public class Enemy : MonoBehaviour
     //Imma need tech support for moving shit "off screen"
     }
 
-    protected void EnterNewState(EnemyState state)
+    protected void RunCurrentState(EnemyState state)
     {
         switch (_currentState)
         {
@@ -120,8 +132,33 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected void EnterNewState(EnemyState state)
+    {
+        switch (_currentState)
+        {
+            case EnemyState._roaming:
+                //play animation
+                break;
+
+            case EnemyState._chasing:
+                //play animation
+                break;
+
+            case EnemyState._attacking:
+                //play animation
+                break;
+
+            case EnemyState._retreating:
+                //play animation
+                break;
+        }
+    }
+
     protected void ChangeState(EnemyState newState)
     {
+
+        if (_currentState == newState) return;  
+
         _currentState = newState;
         EnterNewState(_currentState);
     }
@@ -142,7 +179,7 @@ public class Enemy : MonoBehaviour
 
     protected void AttackTimer()
     {
-        _attackDuration -= Time.deltaTime;
+        _attackTimer -= Time.deltaTime;
         if(_attackDuration <= 0 )
         {
             _hasTimeLeft = false; 
@@ -158,8 +195,23 @@ public class Enemy : MonoBehaviour
     }
 
 
+    public void SpawnCooldownTimer()
+    {
+        _spawnCountdown -= Time.deltaTime;
+
+        if(_spawnCountdown <= 0)
+        {
+            _spawnCountdown = _spawnRate;
+        }
 
 
 
+    }
 
+
+    public float GetRemainingSpawnTime()
+    {
+
+        return 1.0f;
+    }
 }
