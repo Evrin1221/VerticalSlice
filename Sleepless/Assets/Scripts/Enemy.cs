@@ -27,9 +27,8 @@ public class Enemy : MonoBehaviour
 
     protected EnemyState _currentState;
 
-    //spawning
-    [SerializeField] public float _spawnRate;
-     public float _spawnCountdown;
+  
+   
 
     public enum EnemyState
     {
@@ -40,10 +39,10 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _playerTransform = Locator.Instance._player.transform;
-        _currentState = EnemyState._roaming; //might even do this in the spawner script
+        _currentState = EnemyState._roaming;
         _attackTimer = _attackDuration;
         _hasTimeLeft = true;
-        _spawnCountdown = _spawnRate;
+     
     }
 
     // Update is called once per frame
@@ -51,7 +50,7 @@ public class Enemy : MonoBehaviour
     {
         DetectPlayerInRange();
         RunCurrentState(_currentState);
-
+       
     }
 
     protected virtual void Attack()
@@ -165,7 +164,7 @@ public class Enemy : MonoBehaviour
 
     protected void Roaming()
     {
-        // have it not move and let the autoscroller move it until it gets close enough to player
+        transform.position = transform.position + new Vector3(-1, 0, 0) * _speed*Time.deltaTime;
     }
 
     protected void Follow()
@@ -180,7 +179,7 @@ public class Enemy : MonoBehaviour
     protected void AttackTimer()
     {
         _attackTimer -= Time.deltaTime;
-        if(_attackDuration <= 0 )
+        if(_attackTimer <= 0 )
         {
             _hasTimeLeft = false; 
         }
@@ -195,23 +194,4 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void SpawnCooldownTimer()
-    {
-        _spawnCountdown -= Time.deltaTime;
-
-        if(_spawnCountdown <= 0)
-        {
-            _spawnCountdown = _spawnRate;
-        }
-
-
-
-    }
-
-
-    public float GetRemainingSpawnTime()
-    {
-
-        return 1.0f;
-    }
 }

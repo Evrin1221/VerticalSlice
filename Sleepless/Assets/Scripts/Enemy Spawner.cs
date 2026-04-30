@@ -6,31 +6,60 @@ public class EnemySpawner : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] GameObject[] _enemies;
+    [SerializeField] private EnemySpawnData[] _enemyTypes;
     [SerializeField] GameObject[] _spawnPoints;
 
+    private float[] _spawnTimers;
+
+
+    [System.Serializable]
+
+    public class EnemySpawnData
+    {
+        public GameObject enemyPrefab;
+        public float spawnCooldown;
+    }
     void Start()
     {
-        
+        _spawnTimers = new float[_enemyTypes.Length];
+
+        for( int i=0; i< _enemyTypes.Length; i++ )
+        {
+            _spawnTimers[i] = _enemyTypes[i].spawnCooldown;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnEnemy();
-    }
 
-    private void SpawnEnemy()
-    {
-        for(int i=0; i<_enemies.Length; i++)
+        for(int i =0; i<_enemyTypes.Length;i++)
         {
-            _enemies[i].
+            _spawnTimers[i] -=Time.deltaTime;
+
+            if(_spawnTimers[i] < 0)
+            {
+                
+                SpawnEnemy(i);
+                _spawnTimers[i] = _enemyTypes[i].spawnCooldown;
+            }
         }
+        
     }
 
-    private void SpawnCooldownTimer(float _spawnCooldown)
+    private void SpawnEnemy(int index)
     {
-        
+        Instantiate(_enemyTypes[index].enemyPrefab,PickSpawnPoint(),Quaternion.identity);
+    }
+
+    private Vector3 PickSpawnPoint()
+    {
+        int index = UnityEngine.Random.Range(0,_spawnPoints.Length);
+
+        Vector3 _spawnPoint = _spawnPoints[index].transform.position;
+
+        return _spawnPoint;
+
     }
 
     
