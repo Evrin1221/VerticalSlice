@@ -16,7 +16,20 @@ I also plan on using state machines to respond to the different UI health levels
 In my new breakdown I added another circle to represent my tilemap system. I have everything that is stationary on separate tilemaps on a singular grid (ground, platforms, collectables etc). This is so that I don't have to add my autoscroller script to every stationary category I have, but instead I can just apply it to the entire grid. I thought since this is almost a framework for how I will have to separate my code depending on which sorting categories everything is on, it would be useful to have it included in my breakdown. 
 
 ## Milestone 2 Devlog
-Milestone 2 Devlog goes here.
+
+### Q1
+
+The UI and state machine that responds to how much sanity and awakeness the player has
+
+- Make public values for current sanity and current awakeness
+    - gonna need a set max value for each so I can get a health bar that changes depending on the percentage (private)
+    - current levels (public)
+- Make state machines for each
+    - One each. divide it into 4-5 stages. each state gets triggered by the levels (o god visual scripting)
+- Add the buffs/nerfs for each state
+    - make an array of stuff to apply. make them inherit from the same class with a difficulty level property (scriptable objects maybe)
+    - have a few of them spawn randomy depending on the sanity/awakeness bar value
+
 ## Milestone 3 Devlog
 Milestone 3 Devlog goes here.
 ## Milestone 4 Devlog
