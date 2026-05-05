@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6759085910019236999}
   - component: {fileID: 7117324212575914633}
   - component: {fileID: 3774396818346224831}
+  - component: {fileID: 4567445177566111594}
   m_Layer: 0
   m_Name: eye
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1583384265
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -527594021, guid: 8b2c418c57ca51545bc5ad22ec74be7e, type: 3}
+  m_Sprite: {fileID: 1988057896, guid: b21ff9ee257547c4bb31f59f0d7425b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,3 +103,26 @@ MonoBehaviour:
   _maxhp: 0
   _detectionDistance: 7
   _attackDistance: 0
+  _damage: 0
+  _animator: {fileID: 4567445177566111594}
+--- !u!95 &4567445177566111594
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767100748855592711}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cfaa0aa74b2a66849b85f7e3015937be, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

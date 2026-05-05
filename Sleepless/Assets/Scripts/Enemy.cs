@@ -34,6 +34,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _damage;
 
 
+   //animations
+    [SerializeField] protected Animator _animator;
+
     public enum EnemyState
     {
         _roaming, _chasing, _attacking, _retreating
@@ -111,12 +114,14 @@ public class Enemy : MonoBehaviour
         {
             case EnemyState._roaming:
                 //when enemy instantiated
-                //play the animation. let autoscroller handle the putting in the same line
+                _animator.Play("moving");
                 Roaming();
                 break;
 
             case EnemyState._chasing:
                 //starts when player enters range
+                _animator.Play("spotted");
+                _animator.Play("moving");
                 Follow();
                 break;
 
@@ -130,6 +135,7 @@ public class Enemy : MonoBehaviour
 
             case EnemyState._retreating:
                 //once timer reaches 0. once it reaches this state enemy go off screen and destroy
+                _animator.Play("moving");
                 Retreat();
                 break;
         }
