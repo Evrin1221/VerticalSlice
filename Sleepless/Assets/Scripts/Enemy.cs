@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _maxhp;
     [SerializeField] protected float _detectionDistance;
     [SerializeField] protected float _attackDistance;
+
     
     
     protected Transform _playerTransform;
@@ -27,8 +28,11 @@ public class Enemy : MonoBehaviour
 
     protected EnemyState _currentState;
 
-  
-   
+
+    //dealing damage
+
+    [SerializeField] protected float _damage;
+
 
     public enum EnemyState
     {
@@ -193,5 +197,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    
 
 }
