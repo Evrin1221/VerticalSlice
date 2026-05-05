@@ -53,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode key = KeyCode.A;
 
 
+    //reverse controls
+    private bool _controlsReversed;
+
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
@@ -64,7 +67,15 @@ public class PlayerMovement : MonoBehaviour
     {
         // transform.position = transform.position + new Vector3(1, 0, 0) * _minSpeed * Time.deltaTime;
         DetectIfFalling();
-        Movement();
+        if(_controlsReversed == false)
+        {
+            Movement();
+        }
+        else
+        {
+            ReversedMovement();
+        }
+        
         CoyoteTime();
         JumpBuffer();
         Jump();
@@ -238,6 +249,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+    private void ReversedMovement()
+    {
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position = transform.position + new Vector3(-1, 0, 0) * _speed * Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position = transform.position + new Vector3(1, 0, 0) * _backSpeed * Time.deltaTime;
+        }
+
+
+    }
+
+    public void SetReversedControls()
+    {
+        _controlsReversed = true;
+    }
+
 
 }
 
