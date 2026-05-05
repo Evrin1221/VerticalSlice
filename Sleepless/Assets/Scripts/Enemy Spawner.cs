@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private EnemySpawnData[] _enemyTypes;
     [SerializeField] GameObject[] _spawnPoints;
+    [SerializeField] GameObject[] _retreatPoints;
 
     private float[] _spawnTimers;
 

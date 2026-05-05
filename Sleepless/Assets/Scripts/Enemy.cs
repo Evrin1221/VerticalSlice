@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     protected Transform _playerTransform;
     protected bool _playerInRange;
     protected bool _canAttack;
-    protected float _attackDuration;
+    [SerializeField]protected float _attackDuration;
     protected float _attackTimer;
     protected bool _isAttacking;
     protected bool _hasTimeLeft;
@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
 
             case EnemyState._chasing:
                 //starts when player enters range
-                _animator.Play("spotted");
+                
                 _animator.Play("moving");
                 Follow();
                 break;
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
                 break;
 
             case EnemyState._chasing:
-                //play animation
+                _animator.Play("spotted");
                 break;
 
             case EnemyState._attacking:
@@ -216,5 +216,6 @@ public class Enemy : MonoBehaviour
         return _damage;
     }
     
+   
 
 }
