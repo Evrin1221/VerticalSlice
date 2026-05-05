@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3423409016355158489}
   - component: {fileID: 8648486622473970616}
   - component: {fileID: 4194970821691905836}
-  - component: {fileID: 28997766067784876}
   - component: {fileID: 3596196145687936534}
   m_Layer: 0
   m_Name: grenade
@@ -102,22 +101,6 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
---- !u!114 &28997766067784876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3544799073925142341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: ef65b4031d52f24498130047e53d682a, type: 2}
 --- !u!58 &3596196145687936534
 CircleCollider2D:
   m_ObjectHideFlags: 0
