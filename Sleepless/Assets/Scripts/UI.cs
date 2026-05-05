@@ -5,33 +5,21 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _sanity;
-    [SerializeField] public float sanity =100f;
+    [SerializeField] private TMP_Text _sanityText;
+    [SerializeField] private PlayerState _playerState;
+    private float _sanity;
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        _sanity.text = "Sanity:" + sanity;
+        _sanityText.text = "Sanity:" + _playerState.GetSanity();
         
     }
 
 
-    private void OnEnable()
-    {
-        Enemy.OnEnemyHit += HandleEnemyHit;
-    }
-
-    private void OnDisable()
-    {
-        Enemy.OnEnemyHit -= HandleEnemyHit;
-    }
-
-    private void HandleEnemyHit(Enemy enemy)
-    {
-        sanity -= enemy.GetDamageDealt();
-    }
+    
 }

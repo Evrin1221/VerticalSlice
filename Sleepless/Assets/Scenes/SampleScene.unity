@@ -669,10 +669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[{"name":"UI","value":{"$content":0,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"UnityEngine.GameObject,
-      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
-    _objectReferences:
-    - {fileID: 1803771274}
+    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!4 &932679663
 Transform:
   m_ObjectHideFlags: 0
@@ -1097,6 +1095,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cabed51e53aa858499e8123cacda7edb, type: 3}
+--- !u!1 &1525827440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1525827441}
+  - component: {fileID: 1525827442}
+  m_Layer: 0
+  m_Name: Player state manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1525827441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525827440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0684694, y: -0.8195514, z: -0.13324931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1525827442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525827440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86f7f7a7ec7a844dbcb9f93088f4b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sanity: 100
 --- !u!1 &1574206624 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1372566916697293148, guid: cf9e982cfa1eede4690c1aaad6dce613, type: 3}
@@ -1382,7 +1425,7 @@ GameObject:
   - component: {fileID: 1803771279}
   m_Layer: 5
   m_Name: Main UI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1482,8 +1525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6483ab8da19e264385f8e3e1be2e98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sanity: {fileID: 1645202879}
-  sanity: 100
+  _sanityText: {fileID: 1645202879}
+  _playerState: {fileID: 1525827442}
 --- !u!1001 &1842942514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1558,7 +1601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1857336966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,3 +2154,4 @@ SceneRoots:
   - {fileID: 1857336968}
   - {fileID: 1362582715}
   - {fileID: 932679663}
+  - {fileID: 1525827441}
