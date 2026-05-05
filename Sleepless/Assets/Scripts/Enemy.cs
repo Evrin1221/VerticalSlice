@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,13 @@ public class Enemy : MonoBehaviour
     public enum EnemyState
     {
         _roaming, _chasing, _attacking, _retreating
+    }
+
+    public static event Action<Enemy> OnEnemyHit;
+
+    public void Hit()
+    {
+        OnEnemyHit?.Invoke(this);
     }
 
 
@@ -203,7 +211,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
+    public float GetDamageDealt()
+    {
+        return _damage;
+    }
     
 
 }
