@@ -38,6 +38,10 @@ public class Enemy : MonoBehaviour
    //animations
     [SerializeField] protected Animator _animator;
 
+    //Enemy spawner script
+    [SerializeField] protected GameObject _spawner;
+    protected EnemySpawner _spawnerScript;
+
     public enum EnemyState
     {
         _roaming, _chasing, _attacking, _retreating
@@ -53,7 +57,9 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+
         _playerTransform = Locator.Instance._player.transform;
+        _spawnerScript = _spawner.GetComponent<EnemySpawner>();
         _currentState = EnemyState._roaming;
         _attackTimer = _attackDuration;
         _hasTimeLeft = true;
@@ -111,9 +117,7 @@ public class Enemy : MonoBehaviour
 
     protected void Retreat()
     {
-     //this is the part that MOVES the little guy
-
-    //Imma need tech support for moving shit "off screen"
+     transform.position = _spawnerScript.getRetreatPoint();
     }
 
     protected void RunCurrentState(EnemyState state)
