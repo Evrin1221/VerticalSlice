@@ -30,6 +30,24 @@ The UI and state machine that responds to how much sanity and awakeness the play
     - make an array of stuff to apply. make them inherit from the same class with a difficulty level property (scriptable objects maybe)
     - have a few of them spawn randomy depending on the sanity/awakeness bar value
 
+### Q2
+
+Yes it definitely did help because it helped me identify the parts I couldn't do by myself, which allowed me to schedule time to get help because I knew exactly what I needed help on. It also set up a system that would be heavily integrated later on when I add more visual effects.
+
+The one from W5 was also a huge help because the script it describes is really long and complex, but by having that one script, when I add more enemy variations I literally just need to add them and there's no more code involved. If I'd gone into it with no planning the structure would've been impossible to scale.
+
+### Q3
+
+One instance I used visual scripting was to handle the nerfs depending on the players sanity. I use C# methods in visual scripting in order to get a public value in code that stores the players sanity (in playerstate script), and I have it enter a "nerf" stage (in this version, when the sanity goes down to 90, the controls get reversed). upon entering the state at sanity 90, the graph calls a c# method in the nerfmanager script that reverses the controls. 
+
+![alt text](<Screenshot 2026-05-14 222044.png>)
+![alt text](<Screenshot 2026-05-14 222058.png>)
+
+### Q4
+
+I use tilemaps and animator. The entire thing is grid based, and the player has a running and jumping animation, and the eye enemy has 3 distinct animations, moving, attack start, and attacking. 
+
+
 ## Milestone 3 Devlog
 Milestone 3 Devlog goes here.
 ## Milestone 4 Devlog
