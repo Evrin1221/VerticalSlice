@@ -17,12 +17,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _detectionDistance;
     [SerializeField] protected float _attackDistance;
 
-    
-    
+
+
     protected Transform _playerTransform;
     protected bool _playerInRange;
     protected bool _canAttack;
-    [SerializeField]protected float _attackDuration;
+    [SerializeField] protected float _attackDuration;
     protected float _attackTimer;
     protected bool _isAttacking;
     protected bool _hasTimeLeft;
@@ -35,8 +35,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _damage;
 
 
-   //animations
+    //animations
     [SerializeField] protected Animator _animator;
+
+
+    //retreat points
+
+    [SerializeField] protected GameObject[] _retreatPoints;
 
     public enum EnemyState
     {
@@ -59,6 +64,9 @@ public class Enemy : MonoBehaviour
         _hasTimeLeft = true;
      
     }
+
+
+   
 
     // Update is called once per frame
     void Update()
@@ -88,7 +96,7 @@ public class Enemy : MonoBehaviour
             ChangeState(EnemyState._attacking);
         }
 
-        else if( (_attackDistance <= _distanceToPlayer) &&(_distanceToPlayer<=_detectionDistance))
+        else if( (_attackDistance < _distanceToPlayer) &&(_distanceToPlayer<=_detectionDistance))
             //chasing but not attacking
         {
             _playerInRange = true;
@@ -122,14 +130,14 @@ public class Enemy : MonoBehaviour
         {
             case EnemyState._roaming:
                 //when enemy instantiated
-                _animator.Play("moving");
+                
                 Roaming();
                 break;
 
             case EnemyState._chasing:
                 //starts when player enters range
                 
-                _animator.Play("moving");
+                
                 Follow();
                 break;
 
@@ -143,7 +151,7 @@ public class Enemy : MonoBehaviour
 
             case EnemyState._retreating:
                 //once timer reaches 0. once it reaches this state enemy go off screen and destroy
-                _animator.Play("moving");
+                
                 Retreat();
                 break;
         }
@@ -155,18 +163,34 @@ public class Enemy : MonoBehaviour
         {
             case EnemyState._roaming:
                 //play animation
+                _animator.SetBool("isAttacking", false);
+                _animator.Play("moving");
+                Debug.Log("roaming");
                 break;
 
             case EnemyState._chasing:
-                _animator.Play("spotted");
+
+                _animator.SetBool("isAttacking", false);
+               // _animator.Play("spotted"); doesnt exist yet
+                _animator.Play("moving");
+                Debug.Log("chasing");
                 break;
+                
 
             case EnemyState._attacking:
                 //play animation
+                _animator.SetBool("isAttacking", true);
+                _animator.Play("start attack");
+                //_animator.Play("attack");
+                Debug.Log("attacking");
                 break;
 
             case EnemyState._retreating:
                 //play animation
+                _animator.SetBool("isAttacking", false);
+                _animator.Play("moving");
+                Debug.Log("retreating");
+
                 break;
         }
     }

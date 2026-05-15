@@ -103,7 +103,7 @@ MonoBehaviour:
   _hp: 0
   _maxhp: 0
   _detectionDistance: 4
-  _attackDistance: 0
+  _attackDistance: 2
   _attackDuration: 3
   _damage: 2
   _animator: {fileID: 4567445177566111594}
