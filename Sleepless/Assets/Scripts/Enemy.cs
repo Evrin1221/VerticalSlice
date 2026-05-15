@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _maxhp;
     [SerializeField] protected float _detectionDistance;
     [SerializeField] protected float _attackDistance;
-    
+    [SerializeField] protected Collider2D _attackHitBox;
 
     
     
@@ -39,6 +39,9 @@ public class Enemy : MonoBehaviour
    //animations
     [SerializeField] protected Animator _animator;
 
+    //Enemy spawner script
+    [SerializeField] protected GameObject _spawner;
+    protected EnemySpawner _spawnerScript;
 
     public enum EnemyState
     {
@@ -57,7 +60,7 @@ public class Enemy : MonoBehaviour
     {
 
         _playerTransform = Locator.Instance._player.transform;
-       
+        _spawnerScript = _spawner.GetComponent<EnemySpawner>();
         _currentState = EnemyState._roaming;
         _attackTimer = _attackDuration;
         _hasTimeLeft = true;
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour
             ChangeState(EnemyState._attacking);
         }
 
-        else if( (_attackDistance > _distanceToPlayer) &&(_distanceToPlayer<=_detectionDistance))
+        else if( (_attackDistance <= _distanceToPlayer) &&(_distanceToPlayer<=_detectionDistance))
             //chasing but not attacking
         {
             _playerInRange = true;
@@ -115,7 +118,7 @@ public class Enemy : MonoBehaviour
 
     protected void Retreat()
     {
-     
+     transform.position = _spawnerScript.getRetreatPoint();
     }
 
     protected void RunCurrentState(EnemyState state)
@@ -124,20 +127,19 @@ public class Enemy : MonoBehaviour
         {
             case EnemyState._roaming:
                 //when enemy instantiated
-               
+                _animator.Play("moving");
                 Roaming();
                 break;
 
             case EnemyState._chasing:
                 //starts when player enters range
                 
-                
+                _animator.Play("moving");
                 Follow();
                 break;
 
             case EnemyState._attacking:
                 //for the duration of the timer * note: if timer doesn't run out you keep the value and it can go back to roaming and chasing depending on whether player in range
-                
                 Attack();
                 Follow();
                 AttackTimer();
@@ -146,7 +148,7 @@ public class Enemy : MonoBehaviour
 
             case EnemyState._retreating:
                 //once timer reaches 0. once it reaches this state enemy go off screen and destroy
-                
+                _animator.Play("moving");
                 Retreat();
                 break;
         }
@@ -168,7 +170,6 @@ public class Enemy : MonoBehaviour
 
             case EnemyState._attacking:
                 _animator.Play("attack start");
-                _animator.Play("attack");
                 _animator.SetBool("_isAttacking", true);
                 break;
 
@@ -224,5 +225,6 @@ public class Enemy : MonoBehaviour
         return _damage;
     }
     
-  
+   
+
 }
