@@ -63,5 +63,15 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    
+    public Vector3 PickRetreatPoint()
+    {
+        int index = UnityEngine.Random.Range(0, _retreatPoints.Length);
+
+        Vector3 _retreatPoint = _retreatPoints[index].transform.position;
+
+        return _retreatPoint;
+
+    }
+
+
 }

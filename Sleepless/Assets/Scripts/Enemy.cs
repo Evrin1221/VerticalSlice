@@ -38,10 +38,10 @@ public class Enemy : MonoBehaviour
     //animations
     [SerializeField] protected Animator _animator;
 
+    //retreating
+    protected EnemySpawner _spawner;
+    protected Vector3 _retreatPoint;
 
-    //retreat points
-
-    [SerializeField] protected GameObject[] _retreatPoints;
 
     public enum EnemyState
     {
@@ -62,7 +62,8 @@ public class Enemy : MonoBehaviour
         _currentState = EnemyState._roaming;
         _attackTimer = _attackDuration;
         _hasTimeLeft = true;
-     
+        _spawner = FindObjectOfType<EnemySpawner>();
+
     }
 
 
@@ -73,6 +74,7 @@ public class Enemy : MonoBehaviour
     {
         DetectPlayerInRange();
         RunCurrentState(_currentState);
+        CheckRetreated();
        
     }
 
@@ -119,8 +121,9 @@ public class Enemy : MonoBehaviour
 
     protected void Retreat()
     {
-     //this is the part that MOVES the little guy
-
+        //this is the part that MOVES the little guy
+        _retreatPoint = _spawner.PickRetreatPoint();
+        transform.position = _retreatPoint;
     //Imma need tech support for moving shit "off screen"
     }
 
@@ -165,7 +168,7 @@ public class Enemy : MonoBehaviour
                 //play animation
                 _animator.SetBool("isAttacking", false);
                 _animator.Play("moving");
-                Debug.Log("roaming");
+               // Debug.Log("roaming");
                 break;
 
             case EnemyState._chasing:
@@ -173,7 +176,7 @@ public class Enemy : MonoBehaviour
                 _animator.SetBool("isAttacking", false);
                // _animator.Play("spotted"); doesnt exist yet
                 _animator.Play("moving");
-                Debug.Log("chasing");
+               // Debug.Log("chasing");
                 break;
                 
 
@@ -182,7 +185,7 @@ public class Enemy : MonoBehaviour
                 _animator.SetBool("isAttacking", true);
                 _animator.Play("start attack");
                 //_animator.Play("attack");
-                Debug.Log("attacking");
+               // Debug.Log("attacking");
                 break;
 
             case EnemyState._retreating:
@@ -223,7 +226,8 @@ public class Enemy : MonoBehaviour
         _attackTimer -= Time.deltaTime;
         if(_attackTimer <= 0 )
         {
-            _hasTimeLeft = false; 
+            _hasTimeLeft = false;
+            print("time up");
         }
     }
 
@@ -239,7 +243,14 @@ public class Enemy : MonoBehaviour
     {
         return _damage;
     }
-    
-   
+
+    protected void CheckRetreated()
+    {
+        if (transform.position == _retreatPoint)
+        {
+            Destroy(gameObject);
+            Debug.Log("enemy gone");
+        }
+    }
 
 }
