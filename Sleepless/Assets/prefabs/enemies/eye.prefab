@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3774396818346224831}
   - component: {fileID: 4567445177566111594}
   - component: {fileID: -6133408708333215261}
+  - component: {fileID: 7124653324181320835}
   m_Layer: 0
   m_Name: eye
   m_TagString: Enemy
@@ -100,8 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _hp: 0
-  _maxhp: 0
+  _maxhp: 2
   _detectionDistance: 4
   _attackDistance: 2
   _attackDuration: 3
@@ -160,6 +160,33 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.31467593, y: -0.020603776}
+  m_Offset: {x: -0.028948307, y: 0.0063517094}
   serializedVersion: 2
-  m_Radius: 0.32104957
+  m_Radius: 0.6337327
+--- !u!50 &7124653324181320835
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767100748855592711}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

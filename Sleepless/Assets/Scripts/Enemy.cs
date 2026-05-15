@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     //Shared variables
 
     [SerializeField] protected float _speed;
-    [SerializeField] protected float _hp;
+    protected float _hp;
     [SerializeField] protected float _maxhp;
     [SerializeField] protected float _detectionDistance;
     [SerializeField] protected float _attackDistance;
@@ -43,6 +43,10 @@ public class Enemy : MonoBehaviour
     protected Vector3 _retreatPoint;
 
 
+    //receiving damage
+    //later make a class for attack data (type and damage amt)
+
+
     public enum EnemyState
     {
         _roaming, _chasing, _attacking, _retreating
@@ -63,6 +67,7 @@ public class Enemy : MonoBehaviour
         _attackTimer = _attackDuration;
         _hasTimeLeft = true;
         _spawner = FindObjectOfType<EnemySpawner>();
+        _hp = _maxhp;
 
     }
 
@@ -75,6 +80,7 @@ public class Enemy : MonoBehaviour
         DetectPlayerInRange();
         RunCurrentState(_currentState);
         CheckRetreated();
+        Die();
        
     }
 
@@ -123,8 +129,9 @@ public class Enemy : MonoBehaviour
     {
         //this is the part that MOVES the little guy
         _retreatPoint = _spawner.PickRetreatPoint();
-        transform.position = _retreatPoint;
-    //Imma need tech support for moving shit "off screen"
+        transform.position = Vector2.MoveTowards(transform.position,_retreatPoint,_speed * Time.deltaTime);
+
+        //Imma need tech support for moving shit "off screen"
     }
 
     protected void RunCurrentState(EnemyState state)
@@ -192,7 +199,7 @@ public class Enemy : MonoBehaviour
                 //play animation
                 _animator.SetBool("isAttacking", false);
                 _animator.Play("moving");
-                Debug.Log("retreating");
+               // Debug.Log("retreating");
 
                 break;
         }
@@ -227,7 +234,7 @@ public class Enemy : MonoBehaviour
         if(_attackTimer <= 0 )
         {
             _hasTimeLeft = false;
-            print("time up");
+            //print("time up");
         }
     }
 
@@ -249,8 +256,42 @@ public class Enemy : MonoBehaviour
         if (transform.position == _retreatPoint)
         {
             Destroy(gameObject);
-            Debug.Log("enemy gone");
+            //Debug.Log("enemy gone");
         }
     }
 
+    private bool _hitByGrenade;
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Attack"))
+        {
+            TakeDamage(2);
+            Debug.Log("Damage taken " + _hp);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Enemy touched by: " + collision.name + " tag: " + collision.tag);
+
+        if (collision.CompareTag("Attack"))
+        {
+            TakeDamage(2);
+            Debug.Log("Damage taken " + _hp);
+        }
+    }
+
+    private void TakeDamage(float damageTaken)
+    {
+        _hp -= damageTaken;
+    }
+
+    private void Die()
+    {
+        if (_hp <= 0)
+        {
+            Destroy(gameObject);
+            Debug.Log("died");
+        }
+    }
 }

@@ -56,10 +56,15 @@ public class PlayerMovement : MonoBehaviour
     //reverse controls
     private bool _controlsReversed;
 
+
+    //items
+    private Inventory _inventory;
+    [SerializeField] private GameObject _grenadeExplosion;
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _inventory = Locator.Instance._inventory;
     }
 
     // Update is called once per frame
@@ -83,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         AnimatorGroundedCheck();
 
 
-       SpawnCircle();
+       UseGrenade();
 
 
     }
@@ -267,6 +272,20 @@ public class PlayerMovement : MonoBehaviour
     public void SetReversedControls()
     {
         _controlsReversed = true;
+    }
+
+    private void UseGrenade()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("C pressed. Grenades: " + _inventory.GetGrenadeCount());
+
+            if (_inventory.GetGrenadeCount() > 0)
+            {
+                Instantiate(_grenadeExplosion, transform.position, Quaternion.identity);
+                _inventory.UpdateGrenadeCount(-1);
+            }
+        }
     }
 
 
