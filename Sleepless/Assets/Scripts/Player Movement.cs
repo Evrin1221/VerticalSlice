@@ -244,6 +244,7 @@ public class PlayerMovement : MonoBehaviour
             if (enemy != null)
             {
                 enemy.Hit(); // this triggers the event
+
             }
             
         }
