@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _maxhp;
     [SerializeField] protected float _detectionDistance;
     [SerializeField] protected float _attackDistance;
-    [SerializeField] protected Collider2D _attackHitBox;
 
     
     
@@ -159,23 +158,19 @@ public class Enemy : MonoBehaviour
         switch (_currentState)
         {
             case EnemyState._roaming:
-                _animator.Play("moving");
-                _animator.SetBool("_isAttacking", false);
+                //play animation
                 break;
 
             case EnemyState._chasing:
                 _animator.Play("spotted");
-                _animator.SetBool("_isAttacking", false);
                 break;
 
             case EnemyState._attacking:
-                _animator.Play("attack start");
-                _animator.SetBool("_isAttacking", true);
+                //play animation
                 break;
 
             case EnemyState._retreating:
-                _animator.Play("moving");
-                _animator.SetBool("_isAttacking", false);
+                //play animation
                 break;
         }
     }
