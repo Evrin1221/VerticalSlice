@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
     //Animations
     private Animator _animator;
+    [SerializeField]  private Animator _haloAnimator;
+    [SerializeField] private GameObject _halo;
 
     //temp grenade
     [SerializeField] private GameObject circlePrefab;
@@ -286,6 +288,12 @@ public class PlayerMovement : MonoBehaviour
                 _inventory.UpdateGrenadeCount(-1);
             }
         }
+    }
+
+    public void PlayHalo()
+    {
+        _halo.SetActive(true);
+        _haloAnimator.Play("dizzy halo");
     }
 
 

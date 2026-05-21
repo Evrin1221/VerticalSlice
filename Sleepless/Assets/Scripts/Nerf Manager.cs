@@ -19,5 +19,6 @@ public class NerfManager : MonoBehaviour
     public void ReverseControls()
     {
         Locator.Instance._player.SetReversedControls();
+        Locator.Instance._player.PlayHalo();
     }
 }
