@@ -128,8 +128,8 @@ public class Enemy : MonoBehaviour
     protected void Retreat()
     {
         //this is the part that MOVES the little guy
-        _retreatPoint = _spawner.PickRetreatPoint();
-        transform.position = Vector2.MoveTowards(transform.position,_retreatPoint,_speed * Time.deltaTime);
+        _retreatPoint = _spawner.PickRetreatPoint(transform);
+        transform.position = Vector2.MoveTowards(transform.position,_retreatPoint,_speed*20 * Time.deltaTime);
 
         //Imma need tech support for moving shit "off screen"
     }

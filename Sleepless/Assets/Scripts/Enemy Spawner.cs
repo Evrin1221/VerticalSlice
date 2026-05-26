@@ -63,14 +63,23 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public Vector3 PickRetreatPoint()
+    public Vector3 PickRetreatPoint(Transform enemy)
     {
-        int index = UnityEngine.Random.Range(0, _retreatPoints.Length);
+        GameObject closestPoint = null;
+        float closestDistance = Mathf.Infinity;
 
-        Vector3 _retreatPoint = _retreatPoints[index].transform.position;
+        foreach (GameObject point in _retreatPoints)
+        {
+            float distance = Vector3.Distance(enemy.position, point.transform.position);
 
-        return _retreatPoint;
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPoint = point;
+            }
+        }
 
+        return closestPoint.transform.position;
     }
 
 
