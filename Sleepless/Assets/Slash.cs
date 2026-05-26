@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : Attack
+public class Slash : Attack
 {
-    // Start is called before the first frame update
-
-    [SerializeField] private float _lifeTime = 1f;
-    
+    [SerializeField] private float _lifeTime = 0.5f;
     protected override void Start()
     {
         base.Start();
         Destroy(gameObject, _lifeTime);
     }
 
-    
-
+ 
 }

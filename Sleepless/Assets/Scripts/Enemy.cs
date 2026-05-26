@@ -264,9 +264,10 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Attack"))
+        Attack attack = collision.GetComponent<Attack>();
+        if (attack != null)
         {
-            TakeDamage(2);
+            TakeDamage(attack.GetDamage());
             Debug.Log("Damage taken " + _hp);
         }
     }
@@ -274,9 +275,11 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy touched by: " + collision.name + " tag: " + collision.tag);
 
-        if (collision.CompareTag("Attack"))
+        Attack attack = collision.GetComponent<Attack>();
+
+        if (attack != null)
         {
-            TakeDamage(2);
+            TakeDamage(attack.GetDamage());
             Debug.Log("Damage taken " + _hp);
         }
     }

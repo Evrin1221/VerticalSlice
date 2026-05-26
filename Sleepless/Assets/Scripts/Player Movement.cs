@@ -62,6 +62,11 @@ public class PlayerMovement : MonoBehaviour
     //items
     private Inventory _inventory;
     [SerializeField] private GameObject _grenadeExplosion;
+
+    // different damage values
+
+    [SerializeField] private float _baseAttack;
+ 
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
