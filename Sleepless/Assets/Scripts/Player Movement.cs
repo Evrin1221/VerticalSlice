@@ -63,9 +63,8 @@ public class PlayerMovement : MonoBehaviour
     private Inventory _inventory;
     [SerializeField] private GameObject _grenadeExplosion;
 
-    // different damage values
-
-    [SerializeField] private float _baseAttack;
+    // base attack
+    [SerializeField] private GameObject _slash;
  
     void Start()
     {
@@ -94,8 +93,8 @@ public class PlayerMovement : MonoBehaviour
         ApplyFallMultiplier();
         AnimatorGroundedCheck();
 
-
-       UseGrenade();
+        DefaultAttack();
+        UseGrenade();
 
 
     }
@@ -301,6 +300,20 @@ public class PlayerMovement : MonoBehaviour
         _haloAnimator.Play("dizzy halo");
     }
 
+    private void Slash()
+    {
+        _slash.SetActive(true);
+        Animator _slashAnimator = _slash.GetComponent<Animator>();
+        _slashAnimator.Play("slash");
+    }
+
+    private void DefaultAttack()
+    {
+        if (Input.GetKeyDown (KeyCode.X))
+        {
+            Slash();
+        }
+    }
 
 }
 

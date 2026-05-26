@@ -5,11 +5,20 @@ using UnityEngine;
 public class Slash : Attack
 {
     [SerializeField] private float _lifeTime = 0.5f;
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
-        Destroy(gameObject, _lifeTime);
+        base.OnEnable();
+        Invoke(nameof(DisableSlash), _lifeTime);
     }
 
- 
+    private void DisableSlash()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
+
 }

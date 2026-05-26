@@ -15,5 +15,10 @@ public class Attack : MonoBehaviour
     {
         return _damage;
     }
+
+    protected virtual void OnEnable()
+    {
+
+    }
 }
 
