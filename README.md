@@ -61,24 +61,3 @@ Final Devlog goes here.
 
 
 
-## W8
-
-### Activity 1
-
-#### Playtest goals:
-- is it intuitive
-- do players understand the loop - enemies spawn, you kill them, or they bring your sanity down
-- animation that plays when your controls get reversed
-
-* new stuff since milestone 2: more animations
-
-[link](https://evrin-lee.itch.io/sleepless-playtest2)
-
-#### Playtest notes:
-- people like the grenades
-- need more vfx or sfx to indicate when something is happening/changing
-- gotta actually finish the terrain
-
-* note to self: tech support for: whys the dizzy halo appearing early, why's the UI appearing somewhere weird
-
-
