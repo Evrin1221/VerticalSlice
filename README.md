@@ -49,7 +49,23 @@ I use tilemaps and animator. The entire thing is grid based, and the player has 
 
 
 ## Milestone 3 Devlog
-Milestone 3 Devlog goes here.
+
+### Q1
+
+![alt text](<Screenshot 2026-05-28 215225.png>)![alt text](<Screenshot 2026-05-28 215234.png>)![alt text](<Screenshot 2026-05-28 215242.png>)
+
+This is a full screen effect shader. It takes the amount of time passed multiplied by speed, then puts the whole thing through a sine graph so that we have the back and forth effect. Then we offset the rendering of everything in view by that value using the offset node. we also put it through the lerp node so it interpolates and everything looks smooth. This change is visible when you go below 80 sanity, and gets stronger if you go below 70.
+
+### Q2
+
+One bit of feedback was that there needs to be more visual indicator that shows when something is happening (referring to the reversed control animation that was buggy during last playtest). this has been fixed, and the new nerfs I've added are very obvious visually
+
+### Q3
+
+Since last milestone, I have added two more nerfs, an awakeness bar that increases every time you hit an enemy, one buff (speed up) when your awakeness hits a certain point, health potions that recover your sanity, a basic melee attack. All of the mechanics to play the basic loop is done, only thing left being more enemy variations, which just need to be assets as the system for spawning is all set up. Only thing left is the arm marking mechanic at the end of a checkpoint. 
+
+
+
 ## Milestone 4 Devlog
 Milestone 4 Devlog goes here.
 ## Final Devlog
