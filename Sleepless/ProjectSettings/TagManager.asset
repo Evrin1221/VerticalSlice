@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - UI
   - Attack
+  - health potion
   layers:
   - Default
   - TransparentFX

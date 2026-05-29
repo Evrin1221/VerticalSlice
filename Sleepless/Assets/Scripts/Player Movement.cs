@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -65,6 +67,12 @@ public class PlayerMovement : MonoBehaviour
 
     // base attack
     [SerializeField] private GameObject _slash;
+
+
+    //health potion 
+    public static event Action OnHitHealthPotion;
+    [SerializeField] private float _healthPotionBonus;
+
  
     void Start()
     {
@@ -256,9 +264,22 @@ public class PlayerMovement : MonoBehaviour
             {
                 enemy.Hit(); // this triggers the event
             }
+
+         
             
         }
 
+        if(collision.CompareTag("health potion"))
+        {
+            OnHitHealthPotion?.Invoke();
+            Destroy(collision.gameObject);
+        }
+
+    }
+
+    public float GetHealthPotionBonus()
+    {
+        return _healthPotionBonus;
     }
     private void ReversedMovement()
     {

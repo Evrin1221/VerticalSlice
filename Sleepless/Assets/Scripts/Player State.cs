@@ -15,17 +15,20 @@ public class PlayerState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CapSanity();
     }
 
     private void OnEnable()
     {
         Enemy.OnEnemyHit += HandleEnemyHit;
+        PlayerMovement.OnHitHealthPotion += HandleGetHealthPotion;
+
     }
 
     private void OnDisable()
     {
         Enemy.OnEnemyHit -= HandleEnemyHit;
+        PlayerMovement.OnHitHealthPotion -= HandleGetHealthPotion;
     }
 
     private void HandleEnemyHit(Enemy enemy)
@@ -33,8 +36,20 @@ public class PlayerState : MonoBehaviour
         sanity -= enemy.GetDamageDealt();
     }
 
+    private void HandleGetHealthPotion()
+    {
+        sanity += Locator.Instance._player.GetHealthPotionBonus(); 
+    }
     public float GetSanity()
     { 
         return sanity;
+    }
+
+    private void CapSanity()
+    {
+        if (sanity > 100)
+        {
+            sanity = 100;
+        }
     }
 }
