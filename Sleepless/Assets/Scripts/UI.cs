@@ -9,6 +9,9 @@ public class UI : MonoBehaviour
     [SerializeField] private TMP_Text _sanityText;
     [SerializeField] private PlayerState _playerState;
 
+    //awakeness
+    [SerializeField] private TMP_Text _awakenessText;
+
     //items
     [SerializeField] private Inventory _inventory;
     [SerializeField] private TMP_Text _grenadeText;
@@ -21,8 +24,9 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _sanityText.text = "Sanity:" + _playerState.GetSanity();
-        _grenadeText.text = "Grenades:" + _inventory.GetGrenadeCount();
+        _sanityText.text = "Sanity: " + _playerState.GetSanity();
+        _grenadeText.text = "Grenades: " + _inventory.GetGrenadeCount();
+        _awakenessText.text = "Awakeness: " + _playerState.GetAwakeness();
     }
 
 

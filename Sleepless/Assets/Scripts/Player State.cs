@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerState : MonoBehaviour
 {
     // Start is called before the first frame update
 
     [SerializeField] public float sanity = 100f;
+    [SerializeField] public float awakeness = 0f;
     void Start()
     {
         
@@ -51,5 +53,10 @@ public class PlayerState : MonoBehaviour
         {
             sanity = 100;
         }
+    }
+
+    public float GetAwakeness()
+    {
+        return awakeness;
     }
 }
