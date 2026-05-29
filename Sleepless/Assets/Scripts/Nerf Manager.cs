@@ -16,9 +16,23 @@ public class NerfManager : MonoBehaviour
         
     }
 
+    [SerializeField] Material _wobblyVision;
     public void ReverseControls()
     {
         Locator.Instance._player.SetReversedControls();
         Locator.Instance._player.PlayHalo();
+    }
+
+    public void WobblyVisionWeak()
+    {
+        _wobblyVision.SetFloat("_Blend", 0.1f);
+        Debug.Log("wobbly vision on");
+
+    }
+
+    public void WobblyVisionStrong()
+    {
+        _wobblyVision.SetFloat("_Blend", 0.25f);
+
     }
 }

@@ -273,7 +273,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Enemy touched by: " + collision.name + " tag: " + collision.tag);
+      
 
         Attack attack = collision.GetComponent<Attack>();
 

@@ -54,7 +54,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Amplitude: 1
-    - _Blend: 0.297
+    - _Blend: 0
     - _EnableExternalAlpha: 0
     - _NoiseScale: 10
     m_Colors:
