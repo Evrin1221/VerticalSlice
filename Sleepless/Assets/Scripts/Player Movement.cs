@@ -141,12 +141,12 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.Space) && _isJumping)
+        if ((Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.UpArrow)|| Input.GetKey(KeyCode.Z)) && _isJumping)
         {
             JumpTimer();
         }
 
-        if ((_jumpTimer >= _maxJumpHoldTime || Input.GetKeyUp(KeyCode.Space)) && _isJumping)
+        if ((_jumpTimer >= _maxJumpHoldTime || (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z)) && _isJumping))
         {
             _isJumping = false;
             _jumpTimer = 0f;
@@ -281,6 +281,8 @@ public class PlayerMovement : MonoBehaviour
     {
         return _healthPotionBonus;
     }
+
+
     private void ReversedMovement()
     {
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))

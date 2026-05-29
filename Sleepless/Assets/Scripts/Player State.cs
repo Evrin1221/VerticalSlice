@@ -24,6 +24,7 @@ public class PlayerState : MonoBehaviour
     {
         Enemy.OnEnemyHit += HandleEnemyHit;
         PlayerMovement.OnHitHealthPotion += HandleGetHealthPotion;
+        Attack.OnPlayerHitEnemy += HandleAwakeness;
 
     }
 
@@ -31,6 +32,7 @@ public class PlayerState : MonoBehaviour
     {
         Enemy.OnEnemyHit -= HandleEnemyHit;
         PlayerMovement.OnHitHealthPotion -= HandleGetHealthPotion;
+        Attack.OnPlayerHitEnemy -= HandleAwakeness;
     }
 
     private void HandleEnemyHit(Enemy enemy)
@@ -41,6 +43,11 @@ public class PlayerState : MonoBehaviour
     private void HandleGetHealthPotion()
     {
         sanity += Locator.Instance._player.GetHealthPotionBonus(); 
+    }
+
+    private void HandleAwakeness(Attack attack)
+    {
+        awakeness += attack.GetDamage();
     }
     public float GetSanity()
     { 
