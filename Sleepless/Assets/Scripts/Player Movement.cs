@@ -141,12 +141,12 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if ((Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.UpArrow)|| Input.GetKey(KeyCode.Z)) && _isJumping)
+        if ((Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.Z)) && _isJumping)
         {
             JumpTimer();
         }
 
-        if ((_jumpTimer >= _maxJumpHoldTime || (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z)) && _isJumping))
+        if (((_jumpTimer >= _maxJumpHoldTime || !(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Z))) && _isJumping))
         {
             _isJumping = false;
             _jumpTimer = 0f;
@@ -190,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void JumpBuffer()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Z))
         {
             _jumpBufferTimer = _jumpBufferMax;
             _storingJump = true;
@@ -325,6 +325,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Slash()
     {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            _slash.transform.localRotation = Quaternion.Euler(0, 0, 90);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            _slash.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        }
+        else
+        {
+            _slash.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+
         _slash.SetActive(true);
         Animator _slashAnimator = _slash.GetComponent<Animator>();
         _slashAnimator.Play("slash");
@@ -338,6 +351,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+    public void SpeedUp()
+    {
+        _speed += 3;
+        Debug.Log("buff worked");
+
+    }
+
 }
+
+
 
 
