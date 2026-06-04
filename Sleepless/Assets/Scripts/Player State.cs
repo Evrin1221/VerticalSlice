@@ -18,6 +18,9 @@ public class PlayerState : MonoBehaviour
     void Update()
     {
         CapSanity();
+        CapAwakeness();
+        CapSanityMin();
+        TransferAwakenessToSanity();
     }
 
     private void OnEnable()
@@ -59,6 +62,32 @@ public class PlayerState : MonoBehaviour
         if (sanity > 100)
         {
             sanity = 100;
+        }
+    }
+
+    private void CapSanityMin()
+    {
+        if (sanity < 0)
+        {
+            sanity = 0;
+        }
+    }
+
+    private void CapAwakeness()
+    {
+        if (awakeness > 100)
+        {
+            awakeness = 100;
+        }
+    }
+
+
+    private void TransferAwakenessToSanity()
+    {
+        if(sanity == 0)
+        {
+            sanity = awakeness;
+            awakeness = 0;
         }
     }
 
