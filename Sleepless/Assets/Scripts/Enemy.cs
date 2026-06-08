@@ -273,14 +273,21 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
 
-        Attack attack = collision.GetComponent<Attack>();
-
-        if (attack != null)
+        if (collision.CompareTag("Attack"))
         {
-            TakeDamage(attack.GetDamage());
-            Debug.Log("Damage taken " + _hp);
+            Attack attack = collision.GetComponent<Attack>();
+
+            if (attack != null)
+            {
+                TakeDamage(attack.GetDamage());
+                Debug.Log("Damage taken " + _hp);
+            }
+        }
+
+        if (collision.CompareTag("Player"))
+        {
+            Hit();
         }
     }
 

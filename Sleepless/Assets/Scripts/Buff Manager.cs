@@ -21,4 +21,9 @@ public class BuffManager : MonoBehaviour
     {
         Locator.Instance._player.SpeedUp();
     }
+
+    public void BiggerSlash()
+    {
+        Locator.Instance._player.BiggerSlash();
+    }
 }

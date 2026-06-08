@@ -255,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+       /* if (collision.CompareTag("Enemy"))
         {
           
             Enemy enemy = collision.GetComponent<Enemy>();
@@ -268,6 +268,7 @@ public class PlayerMovement : MonoBehaviour
          
             
         }
+       */
 
         if(collision.CompareTag("health potion"))
         {
@@ -356,6 +357,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _speed += 3;
         Debug.Log("buff worked");
+
+    }
+
+    public void BiggerSlash()
+    {
+        _slash.transform.localScale = _slash.transform.localScale * 1.5f;
 
     }
 
