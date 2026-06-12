@@ -8,6 +8,8 @@ public class Locator : MonoBehaviour
     public PlayerMovement _player { get; private set; }
     public Inventory _inventory { get; private set; }
 
+    public ArmMarking _armMarking { get; private set; }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,6 +23,7 @@ public class Locator : MonoBehaviour
         _player = player.GetComponent<PlayerMovement>();
 
         _inventory = FindObjectOfType<Inventory>();
+        _armMarking = FindObjectOfType<ArmMarking>();
     }
     // Start is called before the first frame update
     void Start()
