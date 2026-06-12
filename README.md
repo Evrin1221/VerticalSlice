@@ -71,12 +71,16 @@ Milestone 4 Devlog goes here.
 ## Final Devlog
 
 
-1. The gameplay loop: you traverse the autoscroller 2d plaformer challenge. at points of the game (narratively, the ritual) you have to mark the arm you decided in the beginning of the game is the "correct" arm. by the end of the challenge your score is the number of times you marked the correct arm out of the total times you were prompted to mark the arm. Throughout the challenge, bad performance (taking damage, shown by the sanity levels) is punished by stacked nerfs, and good performance (killing enemies, shown by awakeness levels) is rewarded with stacked buffs. In my game pitch the checkpoints were slightly different areas w different enemies etc. In order to condense this, my vertical slice shows all of the collectables (health potions and grenades), the nerf/buff system, an enemy type that follows a spawning system that scales easily. Throughout the existing platforming challenge, the arm marking UI comes up accordingly, and by the end of this very condensed version you get a total score. This illustrates the broad concept of the player because the full game is essentially the same but with more variety in visual effects, enemies, etc. it keeps the essence of the platforming challenge and scrambling for the mouse to click the arm.
+1. 
+
+The gameplay loop: you traverse the autoscroller 2d plaformer challenge. at points of the game (narratively, the ritual) you have to mark the arm you decided in the beginning of the game is the "correct" arm. by the end of the challenge your score is the number of times you marked the correct arm out of the total times you were prompted to mark the arm. Throughout the challenge, bad performance (taking damage, shown by the sanity levels) is punished by stacked nerfs, and good performance (killing enemies, shown by awakeness levels) is rewarded with stacked buffs. In my game pitch the checkpoints were slightly different areas w different enemies etc. In order to condense this, my vertical slice shows all of the collectables (health potions and grenades), the nerf/buff system, an enemy type that follows a spawning system that scales easily. Throughout the existing platforming challenge, the arm marking UI comes up accordingly, and by the end of this very condensed version you get a total score. This illustrates the broad concept of the player because the full game is essentially the same but with more variety in visual effects, enemies, etc. it keeps the essence of the platforming challenge and scrambling for the mouse to click the arm.
 
 
 
 
-2. This is the shader I used. It is activated when the player goes below 80 sanity and makes the screen all wobbly. It takes the amount of time passed by the speed, and puts it through a sine graph so it wobbles back and forth. We then take the entire screen view and put it through the offset node to offset the entire thing by the value calculated earlier. This is also lerped so that the value change doesnt look snappy and flows like water. In code, I adjust the blend value of the shader to change its intensity depending on the player's sanity. I simply have the blend value at 0 in the beginning and increase it whenever I nerf the player more. 
+2. 
+
+This is the shader I used. It is activated when the player goes below 80 sanity and makes the screen all wobbly. It takes the amount of time passed by the speed, and puts it through a sine graph so it wobbles back and forth. We then take the entire screen view and put it through the offset node to offset the entire thing by the value calculated earlier. This is also lerped so that the value change doesnt look snappy and flows like water. In code, I adjust the blend value of the shader to change its intensity depending on the player's sanity. I simply have the blend value at 0 in the beginning and increase it whenever I nerf the player more. 
 
 ![alt text](<Screenshot 2026-05-28 215225.png>)![alt text](<Screenshot 2026-05-28 215234.png>)![alt text](<Screenshot 2026-05-28 215242.png>)
 
@@ -85,7 +89,9 @@ Milestone 4 Devlog goes here.
 
 
 
-3. I typically separate everything into "types". Basically I like to think about which tags I need to make, and base things off of that. I try to separate everything as much as possible, for example UI should only do text, and take info from a separate health and inventory script. Sound should be dealt in a different script etc. My general rule of thumb is too many scripts is better than no scripts because I've found that combining stuff is way easier than separating stuff. Then I start with the things I can't function without. usually player movement. then I play the game, and see what's missing that stops me from progressing the most, then I work on that. 
+3. 
+
+I typically separate everything into "types". Basically I like to think about which tags I need to make, and base things off of that. I try to separate everything as much as possible, for example UI should only do text, and take info from a separate health and inventory script. Sound should be dealt in a different script etc. My general rule of thumb is too many scripts is better than no scripts because I've found that combining stuff is way easier than separating stuff. Then I start with the things I can't function without. usually player movement. then I play the game, and see what's missing that stops me from progressing the most, then I work on that. 
 
 I don't think I'll use the bubble diagram because visually it looks messy and confusing to me especially when we're dealing with scripts with hundreds of lines of code (I had a few of those and bubble diagraming them would drive me insane) but i do like the idea of separating everything into systems. so I think maybe I'll do something similar, like a bullet point list with headers. 
 
