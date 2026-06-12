@@ -26,4 +26,10 @@ public class BuffManager : MonoBehaviour
     {
         Locator.Instance._player.BiggerSlash();
     }
+
+
+    public void ActivateBubble()
+    {
+        Locator.Instance._player.ActivateBubble();
+    }
 }

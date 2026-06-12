@@ -73,12 +73,17 @@ public class PlayerMovement : MonoBehaviour
     public static event Action OnHitHealthPotion;
     [SerializeField] private float _healthPotionBonus;
 
+    //bubble
+
+    [SerializeField] private GameObject _bubble;
+    [SerializeField] private Animator _bubbleAnimator;
  
     void Start()
     {
         _rb = Locator.Instance._player.gameObject.GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _inventory = Locator.Instance._inventory;
+        _bubble.SetActive(false);
     }
 
     // Update is called once per frame
@@ -366,6 +371,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+    public void ActivateBubble()
+    {
+        _bubble.SetActive(true);
+    }
 }
 
 
