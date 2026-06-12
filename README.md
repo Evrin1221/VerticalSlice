@@ -69,17 +69,30 @@ Since last milestone, I have added two more nerfs, an awakeness bar that increas
 ## Milestone 4 Devlog
 Milestone 4 Devlog goes here.
 ## Final Devlog
-Briefly describe your core gameplay loop and the content we can find in your game. Then, relate the gameplay and content you implemented back to your original plan for creating a Vertical Slice: how does this gameplay and content illustrate to the player what the full game would be like?
-
-In about a paragraph, describe how your rendering effect is activated from gameplay logic. Either attach a screenshot of the relevant Graph OR cite the relevant C# file(s) so we can find them in your repo. Accurately describe your system with technical terms.
-
-Describe your process for how you break down a large project into specific systems. If you don't have a process that works well for you right now, you must come up with an describe a viable plan.
 
 
-Make sure to also answer ALL of these questions in your answer:
-Do you plan on using either the bubble diagram break-downs and/or the task step break-downs we practiced this quarter in your planning process? Why or why not?
-How does the process of breaking down a large project into small steps affect your understanding of the scope of the project?
-How does the plan you're describing relate to your process of creating the Vertical Slice project? You can write about either how things went poorly and how you'd improve your process as a result, or about how things went well that you want to repeat.
+1. The gameplay loop: you traverse the autoscroller 2d plaformer challenge. at points of the game (narratively, the ritual) you have to mark the arm you decided in the beginning of the game is the "correct" arm. by the end of the challenge your score is the number of times you marked the correct arm out of the total times you were prompted to mark the arm. Throughout the challenge, bad performance (taking damage, shown by the sanity levels) is punished by stacked nerfs, and good performance (killing enemies, shown by awakeness levels) is rewarded with stacked buffs. In my game pitch the checkpoints were slightly different areas w different enemies etc. In order to condense this, my vertical slice shows all of the collectables (health potions and grenades), the nerf/buff system, an enemy type that follows a spawning system that scales easily. Throughout the existing platforming challenge, the arm marking UI comes up accordingly, and by the end of this very condensed version you get a total score. This illustrates the broad concept of the player because the full game is essentially the same but with more variety in visual effects, enemies, etc. it keeps the essence of the platforming challenge and scrambling for the mouse to click the arm.
+
+
+
+
+2. This is the shader I used. It is activated when the player goes below 80 sanity and makes the screen all wobbly. It takes the amount of time passed by the speed, and puts it through a sine graph so it wobbles back and forth. We then take the entire screen view and put it through the offset node to offset the entire thing by the value calculated earlier. This is also lerped so that the value change doesnt look snappy and flows like water. In code, I adjust the blend value of the shader to change its intensity depending on the player's sanity. I simply have the blend value at 0 in the beginning and increase it whenever I nerf the player more. 
+
+![alt text](<Screenshot 2026-05-28 215225.png>)![alt text](<Screenshot 2026-05-28 215234.png>)![alt text](<Screenshot 2026-05-28 215242.png>)
+
+
+
+
+
+
+3. I typically separate everything into "types". Basically I like to think about which tags I need to make, and base things off of that. I try to separate everything as much as possible, for example UI should only do text, and take info from a separate health and inventory script. Sound should be dealt in a different script etc. My general rule of thumb is too many scripts is better than no scripts because I've found that combining stuff is way easier than separating stuff. Then I start with the things I can't function without. usually player movement. then I play the game, and see what's missing that stops me from progressing the most, then I work on that. 
+
+I don't think I'll use the bubble diagram because visually it looks messy and confusing to me especially when we're dealing with scripts with hundreds of lines of code (I had a few of those and bubble diagraming them would drive me insane) but i do like the idea of separating everything into systems. so I think maybe I'll do something similar, like a bullet point list with headers. 
+
+While breaking stuff down you can realize that there's a lot more to a singular system than it sounds when you just say there's a "something" system. For example, originally I was hoping to add more enemy variations then I noticed my singular enemy system required a state machine with 4 different states, tons of member variables and took way longer than I expected. I could've realized this earlier if I broke it down in more detail. 
+
+I think I definitely need to be more worried about separating scripts. If a script is called one thing, the only thing it should be doing is that thing. However, I think my process on deciding what needs to be done next worked in my favor for this project, so I'll keep doing that. 
+
 ## Open-source assets
 
 - [Player](https://www.gameart2d.com/cute-girl-free-sprites.html)
