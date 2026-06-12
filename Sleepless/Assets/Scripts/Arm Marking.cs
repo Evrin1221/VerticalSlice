@@ -27,7 +27,7 @@ public class ArmMarking : MonoBehaviour
 
     [SerializeField] private TMP_Text _instructionsText;
 
-
+    private int _attempts;
     private Arm _markedArm;
 
     private List<GameObject> _everythingOnList;
@@ -41,13 +41,14 @@ public class ArmMarking : MonoBehaviour
     private int _uiSpawnTimes;
     void Start()
     {
-
+        _attempts = 0;
         _everythingOnList = new List<GameObject>()
         {
         image,
         leftArm,
         rightArm,
         instructions,
+
 
 
         };
@@ -93,11 +94,12 @@ public class ArmMarking : MonoBehaviour
     }
     void Update()
     {
-     if (_uiSpawnTimes == 4)
+  
+        if (_attempts == 3)
         {
             EverythingOn();
 
-            if(_markedArm == Arm.left)
+            if (_markedArm == Arm.left)
             {
                 _instructionsText.SetText($"Score: {_leftCount}/3");
             }
@@ -105,77 +107,53 @@ public class ArmMarking : MonoBehaviour
             {
                 _instructionsText.SetText($"Score: {_rightCount}/3");
             }
-            
-
         }
     }
 
     public void PickArm(Arm arm)
     {
+        if (_attempts >= 3)
+            return;
+
         if (_uiSpawnTimes == 0)
         {
             _markedArm = arm;
 
-
             if (_markedArm == Arm.left)
             {
-               leftMark.SetActive(true);
-                _everythingOnList.Remove(rightMark);
+                leftMark.SetActive(true);
                 _everythingOnList.Add(leftMark);
-             //   _everythingOffList.Remove(rightMark);
             }
             else
             {
                 rightMark.SetActive(true);
-                _everythingOnList.Remove(leftMark);
                 _everythingOnList.Add(rightMark);
-              //  _everythingOffList.Remove(leftMark);
             }
 
-            //CloseArmUI();
+            CloseArmUI();
+            return;
         }
 
+        if (arm == Arm.left)
+        {
+            if (_leftCount < _leftTallyList.Count)
+            {
+                _everythingOnList.Add(_leftTallyList[_leftCount]);
+            }
+
+            _leftCount++;
+        }
         else
         {
-            _instructionsText.SetText("click the marked arm");
-            Arm selectedArm = arm;
-
-            if(selectedArm == Arm.left)
+            if (_rightCount < _rightTallyList.Count)
             {
-                /*
-                _leftCount++;
-                for (int i = 0; i < _leftCount; i++)
-                {
-                    _leftTallyList[i].SetActive(true);
-                    _everythingOnList.Add(_leftTallyList[i]);
-                }
-                */
-                if (_leftCount < _leftTallyList.Count)
-                {
-                    _leftTallyList[_leftCount].SetActive(true);
-                    _everythingOnList.Add(_leftTallyList[_leftCount]);
-                    _leftCount++;
-                }
-            }
-            else
-            {
-                /*
-                _rightCount++;
-                for (int i = 0; i < _rightCount; i++)
-                {
-                    _rightTallyList[i].SetActive(true);
-                    _everythingOnList.Add(_rightTallyList[i]);
-                }
-                */
-                if (_rightCount < _rightTallyList.Count)
-                {
-                    _rightTallyList[_rightCount].SetActive(true);
-                    _everythingOnList.Add(_rightTallyList[_rightCount]);
-                    _rightCount++;
-                }
+                _everythingOnList.Add(_rightTallyList[_rightCount]);
             }
 
+            _rightCount++;
         }
+
+        _attempts++;
         CloseArmUI();
     }
 
