@@ -97,7 +97,9 @@ I don't think I'll use the bubble diagram because visually it looks messy and co
 
 While breaking stuff down you can realize that there's a lot more to a singular system than it sounds when you just say there's a "something" system. For example, originally I was hoping to add more enemy variations then I noticed my singular enemy system required a state machine with 4 different states, tons of member variables and took way longer than I expected. I could've realized this earlier if I broke it down in more detail. 
 
-I think I definitely need to be more worried about separating scripts. If a script is called one thing, the only thing it should be doing is that thing. However, I think my process on deciding what needs to be done next worked in my favor for this project, so I'll keep doing that. 
+Although sometimes it's hard to think of how a system should be done until you actually start coding it, I think it might be helpful to even draw smaller diagrams for systems halfway through coding to understand that system in particular in more detail, which is something the bubble diagrams miss, because it focuses more on how different systems interact. 
+
+I think I definitely need to be stricter about separating scripts. If a script is called one thing, the only thing it should be doing is that thing. However, I think my process on deciding what needs to be done next worked in my favor for this project, so I'll keep doing that. 
 
 ## Open-source assets
 
