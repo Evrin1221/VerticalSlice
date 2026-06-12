@@ -21,18 +21,21 @@ public class NerfManager : MonoBehaviour
     {
         Locator.Instance._player.SetReversedControls();
         Locator.Instance._player.PlayHalo();
+        SoundManager.Instance.PlayWeakNerf();
     }
 
     public void WobblyVisionWeak()
     {
         _wobblyVision.SetFloat("_Blend", 0.1f);
         Debug.Log("wobbly vision on");
+        SoundManager.Instance.PlayWeakNerf();
 
     }
 
     public void WobblyVisionStrong()
     {
         _wobblyVision.SetFloat("_Blend", 0.25f);
+        SoundManager.Instance.PlayStrongNerf();
 
     }
 }

@@ -57,6 +57,7 @@ public class Enemy : MonoBehaviour
     public void Hit()
     {
         OnEnemyHit?.Invoke(this);
+        SoundManager.Instance.PlayDamage();
     }
 
 

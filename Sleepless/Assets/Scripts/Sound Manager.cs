@@ -16,12 +16,13 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip _slash; //done
     [SerializeField] private AudioClip _bubblePop;//done
     [SerializeField] private AudioClip _bubbleForm;//done
-    [SerializeField] private AudioClip _collect;
-    [SerializeField] private AudioClip _heal;
-    [SerializeField] private AudioClip _damage;
-    [SerializeField] private AudioClip _weakNerf;
-    [SerializeField] private AudioClip _strongNerf;
-    [SerializeField] private AudioClip _buff;
+    [SerializeField] private AudioClip _collect;//done
+    [SerializeField] private AudioClip _heal;//done
+    [SerializeField] private AudioClip _damage;//done
+    [SerializeField] private AudioClip _weakNerf;//done
+    [SerializeField] private AudioClip _strongNerf;//done
+    [SerializeField] private AudioClip _buff;//done
+    [SerializeField] private AudioClip _explosion;
 
 
 
@@ -93,6 +94,11 @@ public class SoundManager : MonoBehaviour
     public void PlayBuff()
     {
         _sfxSource.PlayOneShot(_buff);
+    }
+
+    public void PlayExplosion()
+    {
+        _sfxSource.PlayOneShot(_explosion);
     }
 }
 

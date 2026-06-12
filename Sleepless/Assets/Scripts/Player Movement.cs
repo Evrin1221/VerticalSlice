@@ -319,6 +319,7 @@ public class PlayerMovement : MonoBehaviour
             if (_inventory.GetGrenadeCount() > 0)
             {
                 Instantiate(_grenadeExplosion, transform.position, Quaternion.identity);
+                SoundManager.Instance.PlayExplosion();
                 _inventory.UpdateGrenadeCount(-1);
             }
         }
@@ -370,6 +371,7 @@ public class PlayerMovement : MonoBehaviour
     public void BiggerSlash()
     {
         _slash.transform.localScale = _slash.transform.localScale * 1.5f;
+        SoundManager.Instance.PlayBuff();
 
     }
 
@@ -377,6 +379,7 @@ public class PlayerMovement : MonoBehaviour
     public void ActivateBubble()
     {
         _bubble.SetActive(true);
+        SoundManager.Instance.PlayBuff();
     }
 }
 
