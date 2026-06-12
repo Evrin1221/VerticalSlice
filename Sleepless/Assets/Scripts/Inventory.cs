@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
     public void UpdateGrenadeCount(int amount)
     {
         _grenadeCount += amount;
+        SoundManager.Instance.PlayCollect();
         Debug.Log("Grenades: " + _grenadeCount);
     }
 

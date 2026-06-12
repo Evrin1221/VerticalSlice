@@ -279,6 +279,7 @@ public class PlayerMovement : MonoBehaviour
         {
             OnHitHealthPotion?.Invoke();
             Destroy(collision.gameObject);
+            SoundManager.Instance.PlayCollect();
         }
 
     }
@@ -354,6 +355,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown (KeyCode.X))
         {
             Slash();
+            SoundManager.Instance.PlaySlash();
         }
     }
 

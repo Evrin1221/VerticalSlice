@@ -8,6 +8,7 @@ public class Slash : Attack
     protected override void OnEnable()
     {
         base.OnEnable();
+        
         Invoke(nameof(DisableSlash), _lifeTime);
     }
 

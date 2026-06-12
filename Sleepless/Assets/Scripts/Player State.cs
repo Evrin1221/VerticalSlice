@@ -45,7 +45,8 @@ public class PlayerState : MonoBehaviour
 
     private void HandleGetHealthPotion()
     {
-        sanity += Locator.Instance._player.GetHealthPotionBonus(); 
+        sanity += Locator.Instance._player.GetHealthPotionBonus();
+        SoundManager.Instance.PlayHeal();
     }
 
     private void HandleAwakeness(Attack attack)

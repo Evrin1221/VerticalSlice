@@ -24,6 +24,9 @@ public class Bubble : MonoBehaviour
         {
             timerRunning = false;
             _animator.SetBool("cooldown", false);
+
+            _animator.Play("bubble form");
+            SoundManager.Instance.PlayBubbleForm();
             GetComponent<Collider2D>().enabled = true;
         }
     }
@@ -43,6 +46,7 @@ public class Bubble : MonoBehaviour
             _animator.SetTrigger("pop");
             _animator.SetBool("cooldown", true);
             _animator.Play("bubble pop");
+            SoundManager.Instance.PlayBubblePop();
             StartTimer(2f);
             
 
