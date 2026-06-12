@@ -20,6 +20,9 @@ public class ArmMarking : MonoBehaviour
     [SerializeField] private GameObject rightTally1;
     [SerializeField] private GameObject leftTally2;
     [SerializeField] private GameObject rightTally2;
+    [SerializeField] private GameObject leftTally3;
+    [SerializeField] private GameObject rightTally3;
+
 
 
     [SerializeField] private TMP_Text _instructionsText;
@@ -57,19 +60,19 @@ public class ArmMarking : MonoBehaviour
     instructions,
     leftMark,
     rightMark, 
-    leftTally1,leftTally2,
-    rightTally1,rightTally2,
+    leftTally1,leftTally2,leftTally3,
+    rightTally1,rightTally2,rightTally3
 };
 
 
         _leftTallyList = new List<GameObject>()
         {
-            leftTally1,leftTally2
+            leftTally1,leftTally2, leftTally3
         };
 
         _rightTallyList = new List<GameObject>()
         {
-            rightTally1,rightTally2
+            rightTally1,rightTally2, rightTally3
         };
 
 
@@ -100,7 +103,7 @@ public class ArmMarking : MonoBehaviour
             }
             else
             {
-                _instructionsText.SetText($"Score: {_leftCount}/3");
+                _instructionsText.SetText($"Score: {_rightCount}/3");
             }
             
 
@@ -119,17 +122,17 @@ public class ArmMarking : MonoBehaviour
                leftMark.SetActive(true);
                 _everythingOnList.Remove(rightMark);
                 _everythingOnList.Add(leftMark);
-                _everythingOffList.Remove(rightMark);
+             //   _everythingOffList.Remove(rightMark);
             }
             else
             {
                 rightMark.SetActive(true);
                 _everythingOnList.Remove(leftMark);
                 _everythingOnList.Add(rightMark);
-                _everythingOffList.Remove(leftMark);
+              //  _everythingOffList.Remove(leftMark);
             }
 
-            CloseArmUI();
+            //CloseArmUI();
         }
 
         else
@@ -139,24 +142,41 @@ public class ArmMarking : MonoBehaviour
 
             if(selectedArm == Arm.left)
             {
+                /*
                 _leftCount++;
                 for (int i = 0; i < _leftCount; i++)
                 {
                     _leftTallyList[i].SetActive(true);
                     _everythingOnList.Add(_leftTallyList[i]);
                 }
+                */
+                if (_leftCount < _leftTallyList.Count)
+                {
+                    _leftTallyList[_leftCount].SetActive(true);
+                    _everythingOnList.Add(_leftTallyList[_leftCount]);
+                    _leftCount++;
+                }
             }
             else
             {
+                /*
                 _rightCount++;
                 for (int i = 0; i < _rightCount; i++)
                 {
                     _rightTallyList[i].SetActive(true);
                     _everythingOnList.Add(_rightTallyList[i]);
                 }
+                */
+                if (_rightCount < _rightTallyList.Count)
+                {
+                    _rightTallyList[_rightCount].SetActive(true);
+                    _everythingOnList.Add(_rightTallyList[_rightCount]);
+                    _rightCount++;
+                }
             }
-            CloseArmUI();
+
         }
+        CloseArmUI();
     }
 
     public void OpenArmUI()
