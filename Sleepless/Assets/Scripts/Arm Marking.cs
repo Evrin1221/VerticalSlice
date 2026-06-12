@@ -16,7 +16,10 @@ public class ArmMarking : MonoBehaviour
     [SerializeField] private GameObject leftMark;
     [SerializeField] private GameObject rightMark;
 
-
+    [SerializeField] private GameObject leftTally1;
+    [SerializeField] private GameObject rightTally1;
+    [SerializeField] private GameObject leftTally2;
+    [SerializeField] private GameObject rightTally2;
 
 
     [SerializeField] private TMP_Text _instructionsText;
@@ -27,6 +30,11 @@ public class ArmMarking : MonoBehaviour
     private List<GameObject> _everythingOnList;
     private List<GameObject> _everythingOffList;
 
+    private List<GameObject> _rightTallyList;
+    private List<GameObject> _leftTallyList;
+
+    private int _leftCount;
+    private int _rightCount;    
     private int _uiSpawnTimes;
     void Start()
     {
@@ -48,13 +56,29 @@ public class ArmMarking : MonoBehaviour
     rightArm,
     instructions,
     leftMark,
-    rightMark 
+    rightMark, 
+    leftTally1,leftTally2,
+    rightTally1,rightTally2,
 };
+
+
+        _leftTallyList = new List<GameObject>()
+        {
+            leftTally1,leftTally2
+        };
+
+        _rightTallyList = new List<GameObject>()
+        {
+            rightTally1,rightTally2
+        };
+
 
 
 
         EverythingOff();
         _uiSpawnTimes = 0;
+        _leftCount = 0;
+        _rightCount = 0;    
 
     }
 
@@ -66,7 +90,21 @@ public class ArmMarking : MonoBehaviour
     }
     void Update()
     {
-     
+     if (_uiSpawnTimes == 4)
+        {
+            EverythingOn();
+
+            if(_markedArm == Arm.left)
+            {
+                _instructionsText.SetText($"Score: {_leftCount}/3");
+            }
+            else
+            {
+                _instructionsText.SetText($"Score: {_leftCount}/3");
+            }
+            
+
+        }
     }
 
     public void PickArm(Arm arm)
@@ -96,7 +134,28 @@ public class ArmMarking : MonoBehaviour
 
         else
         {
+            _instructionsText.SetText("click the marked arm");
+            Arm selectedArm = arm;
 
+            if(selectedArm == Arm.left)
+            {
+                _leftCount++;
+                for (int i = 0; i < _leftCount; i++)
+                {
+                    _leftTallyList[i].SetActive(true);
+                    _everythingOnList.Add(_leftTallyList[i]);
+                }
+            }
+            else
+            {
+                _rightCount++;
+                for (int i = 0; i < _rightCount; i++)
+                {
+                    _rightTallyList[i].SetActive(true);
+                    _everythingOnList.Add(_rightTallyList[i]);
+                }
+            }
+            CloseArmUI();
         }
     }
 
